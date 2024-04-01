@@ -1,0 +1,80 @@
+.list_item {
+    -ms-flex-preferred-size: calc(33.33333% - 30px);
+    flex-basis: calc(33.33333% - 30px);
+  
+    margin: 0 15px 30px;
+  
+    overflow: hidden;
+  
+    border-radius: 0.5rem;
+  }
+  .list-item_link {
+    display: block;
+    padding: 1rem;
+    background-color: #121212;
+  
+    overflow: hidden;
+  
+    position: relative;
+  }
+  .list-item_link:hover,
+  .list-item_link:hover .list-item_date {
+    text-decoration: none;
+    color: #FFF;
+  }
+  .list-item_link:hover .list-item_bg {
+    -webkit-transform: scale(10);
+    -ms-transform: scale(10);
+    transform: scale(10);
+  }
+  .list-item_title {
+  
+    overflow: hidden;
+  
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFF;
+  
+    z-index: 2;
+    position: relative;
+  }
+  .list-item_bg {
+    height: 120px;
+    width: 128px;
+    z-index: 1;
+    position: absolute;
+    top: -75px;
+    right: -75px;
+    /* background-color: #4b2424; */
+    border-radius: 50%;
+  
+    -webkit-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
+  }
+
+  .aws-btn {
+
+    --button-default-height: 48px;
+    --button-default-font-size: 14px;
+    --button-default-border-radius: 6px;
+    --button-horizontal-padding: 50px;
+    --button-raise-level: 5px;
+    --button-hover-pressure: 2;
+    --transform-speed: .185s;
+    --button-primary-color: #475472;
+    --button-primary-color-dark: #2a3143;
+    --button-primary-color-light: #d4d9e4;
+    --button-primary-color-hover: #424e6a;
+    --button-primary-border: none;
+    --button-secondary-color: #fffc6c;
+    --button-secondary-color-dark: #b9b500;
+    --button-secondary-color-light: #6c6a00;
+    --button-secondary-color-hover: #fffb3e;
+    --button-secondary-border: none;
+    --button-anchor-color: #f3c8ad;
+    --button-anchor-color-dark: #734922;
+    --button-anchor-color-light: #4c3016;
+    --button-anchor-color-hover: #f1bfa0;
+    --button-anchor-border: 1px solid #8c633c;
+    }
