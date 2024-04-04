@@ -9,7 +9,7 @@ import SignUp from './pages/SignUp'
 function App() {
   console.log(generateGrad());
   return (
-    <div className='flex justify-center items-center h-full overflow-hidden'>
+    <div className='flex justify-center items-center h-full overflow-y-scroll noscrollbar'>
       <BrowserRouter>
       <Routes>
         <Route path='/signin' element={<SignIn/>}></Route>

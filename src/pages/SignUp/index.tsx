@@ -6,6 +6,8 @@ import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router";
 import { onOtpVerify, onSignUp } from "../../firebase/utils";
 import { Toaster } from "react-hot-toast";
+import PasswordChecklist from "react-password-checklist";
+
 // import { onCaptchaVerify } from "../../firebase/utils";
 
 // import PhoneInput from "react-phone-number-input/input";
@@ -16,11 +18,13 @@ const SignUp = () => {
   const [otp, setOtp] = useState<string>();
   const [loading, setLoading] = useState<string>();
   const [isValidateActive, setIsValidateActive] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordAgain, setPasswordAgain] = useState("");
   const navigate = useNavigate();
 
   // useEffect()
   return (
-    <div className="bg-black text-white flex min-h-screen w-screen flex-col items-center pt-16 sm:justify-center sm:pt-0">
+    <div className="bg-black text-white flex min-h-screen w-screen flex-col items-center py-[1rem]">
       <a href="#">
         <div className="text-foreground font-semibold text-2xl tracking-tighter mx-auto flex items-center gap-2">
           <div>
@@ -123,15 +127,15 @@ const SignUp = () => {
                     Validate
                   </Button>
                 </div>
-                  <div id="recaptcha"></div>
+                <div id="recaptcha"></div>
                 {/* <div className="border-[1px] border-[#A1A1A1] rounded-lg p-[1rem]"> */}
                 <div className="my-[1rem]">
                   <OtpInput
                     value={otp}
                     onChange={(value) => {
                       setOtp(value);
-                      if(value.length === 6){
-                        console.log(value)
+                      if (value.length === 6) {
+                        console.log(value);
                         onOtpVerify(otp, window, setLoading);
                       }
                     }}
@@ -163,9 +167,38 @@ const SignUp = () => {
                       <input
                         type="password"
                         name="password"
-                        className="block w-full border-0 bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
+                        value={password}
+                        onChange={(e)=>{setPassword(e.target.value)}}
+                        className="block w-full border-0 border-b-[1px] mb-[1rem] bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
                       />
                     </div>
+                    <div className="flex justify-between">
+                      <label className="text-xs font-medium text-muted-foreground group-focus-within:text-white text-gray-400">
+                        ReEnter Password
+                      </label>
+                    </div>
+                    <div className="flex items-center">
+                      <input
+                        type="password"
+                        name="password"
+                        value={passwordAgain}
+                        onChange={(e)=>{setPasswordAgain(e.target.value)}}
+                        className="block w-full border-0 border-b-[1px] mb-[1rem] bg-transparent p-0 text-sm file:my-1 placeholder:text-muted-foreground/90 focus:outline-none focus:ring-0 focus:ring-teal-500 sm:leading-7 text-foreground"
+                      />
+                    </div>
+                    <PasswordChecklist
+                      rules={[
+                        "minLength",
+                        // "specialChar",
+                        "number",
+                        "capital",
+                        "match",
+                      ]}
+                      minLength={5}
+                      value={password}
+                      valueAgain={passwordAgain}
+                      onChange={(isValid) => {}}
+                    />
                   </div>
                 </div>
               </div>
@@ -199,7 +232,7 @@ const SignUp = () => {
                 <Button
                   type="submit"
                   onClick={() => {
-                    onCaptchaVerify(window, setLoading, phone)
+                    onCaptchaVerify(window, setLoading, phone);
                     // navigate("/signin");
                   }}
                   variant="filled"
@@ -212,7 +245,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 };
