@@ -47,3 +47,8 @@ body {
   font-family: "Monserrat";
   src: url("/fonts/Montserrat/static/Montserrat-Regular.ttf") format("ttf");
 }
+
+
+.noscrollbar::-webkit-scrollbar{
+  width: 0;
+}

@@ -9,7 +9,7 @@ const LinkItem = (props: {
   imageURL?: string;
 }) => {
   return (
-    <AwesomeButton>
+    <AwesomeButton className="">
       {props.title}
     </AwesomeButton>
     // <div className="list_item hover-style-1">

@@ -1,0 +1,1 @@
+export { default as Banner1 } from "/images/banner.1.png";
