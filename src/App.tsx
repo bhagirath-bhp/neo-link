@@ -7,15 +7,14 @@ import { useAuth } from "@clerk/clerk-react";
 import { useEffect } from "react";
 import { auth } from "./firebase/utils";
 import { signInWithCustomToken } from "firebase/auth";
+import Cookies from "js-cookie";
 
 function App() {
   const { getToken } = useAuth();
-
   useEffect(() => {
     const signInWithClerk = async () => {
       const token = await getToken({ template: "integration_firebase" });
       const userCredentials = await signInWithCustomToken(auth, token);
-
     };
     signInWithClerk();
   }, []);

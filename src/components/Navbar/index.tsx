@@ -1,4 +1,5 @@
-import { UserButton } from "@clerk/clerk-react"
+import { UserButton, UserProfile } from "@clerk/clerk-react"
+
 
 const Navbar = () => {
   const signInUrl = import.meta.env.VITE_APP_SIGNIN_URL;
@@ -7,6 +8,7 @@ const Navbar = () => {
       <div className="absolute z-[100]">
         <UserButton afterSignOutUrl={signInUrl}/>
       </div>
+      {/* <UserProfile/> */}
     </div>
   )
 }

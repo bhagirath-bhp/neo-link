@@ -8,7 +8,7 @@ const SignUpPage = () => {
   
 
   return (
-    <div>
+    <div className="h-full w-full flex justify-center items-center my-[2rem]">
         <SignUp signInUrl={signInUrl} afterSignUpUrl={redirectURL}/>
     </div>
   )

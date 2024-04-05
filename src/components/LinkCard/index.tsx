@@ -1,6 +1,6 @@
-const LinkCard = () => {
+const LinkCard = (props: {title: string}) => {
   return (
-    <div>
+    <div className="cursor-pointer">
       <div className="max-w-7xl mx-auto">
         <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
@@ -20,7 +20,7 @@ const LinkCard = () => {
             </svg>
             <div className="space-y-2">
               <h3 className="text-slate-800 text-2xl">
-                Instagram
+                {props.title}
               </h3>
             </div>
           </div>
