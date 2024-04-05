@@ -28,7 +28,7 @@ export const onCaptchaVerify = (window: any, setLoading, phone) => {
           position: 'top-center',
           icon: '🚀',
         });
-        onSignUp(setLoading, window, phone)
+        onValidate(setLoading, window, phone)
       },
       "expired-callback": (response) => {
         console.log("expired: ", response)
@@ -42,7 +42,7 @@ export const onCaptchaVerify = (window: any, setLoading, phone) => {
   }
 };
 
-export const onSignUp = (setLoading, window, phone) => {
+export const onValidate = (setLoading, window, phone) => {
   console.log("on sign up starts")
   setLoading(true);
   onCaptchaVerify(window, setLoading, phone);
@@ -90,3 +90,8 @@ export const onOtpVerify = async (otp, window, setLoading)  => {
 //     console.log(error);
 //   }
 // }
+
+
+const signUp = async () => {
+
+}

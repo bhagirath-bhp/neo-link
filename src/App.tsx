@@ -1,24 +1,36 @@
-import './App.css'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import SignIn from './pages/SignIn'
-import Links from './pages/Links'
-import { generateGrad } from './utils'
-import SignUp from './pages/SignUp'
-
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Links from "./pages/Links";
+import SignUpPage from "./pages/SignUp";
+import SignInPage from "./pages/SignIn";
+import { useAuth } from "@clerk/clerk-react";
+import { useEffect } from "react";
+import { auth } from "./firebase/utils";
+import { signInWithCustomToken } from "firebase/auth";
 
 function App() {
-  console.log(generateGrad());
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    const signInWithClerk = async () => {
+      const token = await getToken({ template: "integration_firebase" });
+      const userCredentials = await signInWithCustomToken(auth, token);
+
+    };
+    signInWithClerk();
+  }, []);
+
   return (
-    <div className='flex justify-center items-center h-full overflow-y-scroll noscrollbar'>
+    <div className="overflow-x-hidden h-full overflow-y-scroll noscrollbar">
       <BrowserRouter>
-      <Routes>
-        <Route path='/signin' element={<SignIn/>}></Route>
-        <Route path='/signup' element={<SignUp/>}></Route>
-        <Route path='/links' element={<Links/>}></Route>
-      </Routes>
+        <Routes>
+          <Route path="/signin" element={<SignInPage />}></Route>
+          <Route path="/signup" element={<SignUpPage />}></Route>
+          <Route path="/links" element={<Links />}></Route>
+        </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
