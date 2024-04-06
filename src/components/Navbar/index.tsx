@@ -5,7 +5,7 @@ const Navbar = () => {
   const signInUrl = import.meta.env.VITE_APP_SIGNIN_URL;
   return (
     <div className="flex justify-end w-full p-[1rem]">
-      <div className="absolute z-[100]">
+      <div className="absolute z-[100] top-3 right-3">
         <UserButton afterSignOutUrl={signInUrl}/>
       </div>
       {/* <UserProfile/> */}

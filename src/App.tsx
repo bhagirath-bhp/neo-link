@@ -16,11 +16,23 @@ function App() {
       const token = await getToken({ template: "integration_firebase" });
       const userCredentials = await signInWithCustomToken(auth, token);
     };
+    const fetchUserDetails = async () => {
+      const userData = await window.Clerk?.user;
+      if (userData) {
+        const temp = {
+          fullName: userData.fullName,
+          imageURL: userData.imageUrl,
+          userId: userData.id,
+        };
+        Cookies.set("userId", temp.userId);
+      }
+    };
+    fetchUserDetails();
     signInWithClerk();
   }, []);
 
   return (
-    <div className="overflow-x-hidden h-full overflow-y-scroll noscrollbar">
+    <div className="overflow-x-hidden h-full overflow-y-scroll noscrollbar bg-black">
       <BrowserRouter>
         <Routes>
           <Route path="/signin" element={<SignInPage />}></Route>
