@@ -21,3 +21,11 @@ export { default as WebsiteBlackOutlined } from "/icons/website-black.svg";
 //generals
 export { default as TrashIcon } from "/icons/trash-icon.svg";
 export { default as EditIcon } from "/icons/edit-white.svg";
+export { default as DeleteWhiteIcon } from "/icons/delete-white.svg";
+export { default as DeleteBlackIcon } from "/icons/delete-black.svg";
+export { default as ExLinkBlackIcon } from "/icons/external-link-black.svg";
+export { default as ExLinkWhiteIcon } from "/icons/external-link-white.svg";
+export { default as GalleryBlackIcon } from "/icons/gallery-black.svg";
+export { default as GalleryWhiteIcon } from "/icons/gallery-white.svg";
+export { default as GalleryBlackPNG } from "/images/gallery-black.png";
+export { default as GalleryWhitePNG } from "/images/gallery-white.png";

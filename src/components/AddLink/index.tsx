@@ -1,8 +1,5 @@
 import { useState } from "react";
 import {
-  Card,
-  CardHeader,
-  CardBody,
   Input,
   Button,
   Typography,
@@ -11,43 +8,36 @@ import {
   TabsBody,
   Tab,
   TabPanel,
-  Select,
-  Option,
   Dialog,
   DialogBody,
   DialogHeader,
   DialogFooter,
 } from "@material-tailwind/react";
 import { sendContact, sendLink } from "@/supabase/supabase";
-import Cookies from "js-cookie";
 import { EditIcon } from "@/assets";
 
-export function AddLink() {
+export function AddLink(props: {userId: string | undefined}) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const userId = Cookies.get("userId");
 
-  // State for the first form
   const [contactData, setContactData] = useState({
     title: "",
     contact: "",
     logoURL: "",
   });
 
-  // State for the second form
   const [linkData, setLinkData] = useState({
     title: "",
     handleURL: "",
     logoURL: "",
   });
 
-  // State to track which form is active
   const [type, setType] = useState("contact");
 
   const handleOpen = () => setOpen(!open);
 
   // Event handler for the first form
-  const handleContactChange = (e) => {
+  const handleContactChange = (e: any) => {
     const { name, value } = e.target;
     setContactData((prevData) => ({
       ...prevData,
@@ -56,7 +46,7 @@ export function AddLink() {
   };
 
   // Event handler for the second form
-  const handleLinkChange = (e) => {
+  const handleLinkChange = (e: any) => {
     const { name, value } = e.target;
     setLinkData((prevData) => ({
       ...prevData,
@@ -64,25 +54,24 @@ export function AddLink() {
     }));
   };
 
-  // Submission handler for both forms
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
     const data = type === "contact" ? contactData : linkData;
-    const response = type === "contact" ? await sendContact(data, userId) : await sendLink(data, userId);
+    (type === "contact" ? await sendContact(data, props.userId) : await sendLink(data, props.userId));
     setOpen(false);
     setLoading(false);
     // window.location.replace("/links");
   };
 
-  return userId && (
-    <div className="absolute bottom-[1rem] right-[1rem]">
+  return (
+    <div className="absolute bottom-[1rem] right-[6rem]">
       <Button
         onClick={handleOpen}
         variant="gradient"
         className="flex justify-center items-center p-[1rem]"
       >
-        <img src={EditIcon} className="h-5"/>
+        <img src={EditIcon} className="h-4"/>
       </Button>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Add Link</DialogHeader>
@@ -126,7 +115,7 @@ export function AddLink() {
                     <Input
                       size="lg"
                       placeholder="Enter title"
-                      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                      className="!border-t-blue-gray-200 focus:!border-t-gray-900 w-[80%]"
                       labelProps={{
                         className: "before:content-none after:content-none",
                       }}

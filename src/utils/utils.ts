@@ -42,3 +42,8 @@ export const handleIcons = {
   "phone": PhoneBlackOutlined,
   "mail": MailBlackOutlined,
 }
+
+export const generateProfileURL = (userId: string | undefined) => {
+  const profileURL = import.meta.env.VITE_APP_LINKSPAGE_URL + `/${userId}`
+  return profileURL;
+}

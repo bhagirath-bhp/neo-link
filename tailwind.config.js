@@ -15,6 +15,11 @@ module.exports = withMT({
       center: true,
       padding: "2rem",
       screens: {
+        "xsm": "250px",
+        "sm": "340px",
+        "md": "640px",
+        "lg": "960px",
+        "xl": "1240px",
         "2xl": "1400px",
       },
     },
@@ -53,6 +58,10 @@ module.exports = withMT({
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "primary-color-1": "var(--primary-color-1)",
+        "primary-color-2": "var(--primary-color-2)",
+        "primary-color-3": "var(--primary-color-3)",
+        "primary-color-4": "var(--primary-color-4)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -78,6 +87,9 @@ module.exports = withMT({
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "breathe": "breathe 3s ease-in-out infinite",
+      },
+      transitionProperty: {
+        'dropdown': 'max-h opacity transform'
       },
     },
   },
