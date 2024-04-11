@@ -9,22 +9,24 @@ import {
 import { deleteContact, listContacts } from "@/supabase/supabase";
 import { useEffect, useState } from "react";
 import Loading from "../Loading";
-import { handleIcons } from "@/utils/utils";
+import { generateHandleURL, handleIcons } from "@/utils/utils";
+import { title } from "process";
+
 
 const ContactCard = (props: {
   userId: string | undefined;
   isSignedIn: boolean | undefined;
 }) => {
-  const [contacts, setContacts] = useState<{id: string, value: string, user_id: string}[]>();
+  const [contacts, setContacts] = useState<{id: string, title: string, value: string, user_id: string}[]>();
   useEffect(() => {
     const fetchContacts = async () => {
-      const response: {id: string, value: string, user_id: string}[] | any = await listContacts(props.userId);
+      const response: {id: string, title: string, value: string, user_id: string}[] | any = await listContacts(props.userId);
       if (response) {
         setContacts(response);
       }
     };
     fetchContacts();
-  }, [contacts]);
+  }, []);
 
   const handleDelete = async (contactId: string, userId: string) => {
     await deleteContact(contactId, userId);
@@ -36,10 +38,11 @@ const ContactCard = (props: {
 
   const listItemSet =
     Array.isArray(contacts) &&
-    contacts.map((contact: {id: string, value: string, user_id: string}, index: string) => {
+    contacts.map((contact: {id: string, title: string, value: string, user_id: string}, index: string) => {
       const iconURL: string = handleIcons[`${contact.title.toLowerCase()}`];
+      const contactURL: string = generateHandleURL(contact.value, contact.title)
       return (
-        <div key={index}>
+        <a key={index} href={contactURL} target="_blank">
           <ListItem
             ripple={false}
             className="py-1 px-2 bg-primary-color-1 hover:bg-primary-color-1"
@@ -53,7 +56,7 @@ const ContactCard = (props: {
                 <img src={iconURL} className="h-5" />
                 {/* {contact.title} */}
               </IconButton>
-              <div className="bg-primary-color-2 p-[0.5rem] rounded-sm w-full flex justify-between items-center">
+              <div className="bg-primary-color-2 p-[0.5rem] rounded-sm w-full flex justify-between items-center text-primary-color-3">
                 <span>{contact.value}</span>
                 <img src={ExLinkBlackIcon} className="h-5" />
               </div>
@@ -73,7 +76,7 @@ const ContactCard = (props: {
             </div>
           </ListItem>
           <div className="-inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-20 group-hover:opacity-45 transition duration-1000 group-hover:duration-200"></div>
-        </div>
+        </a>
       );
     });
 

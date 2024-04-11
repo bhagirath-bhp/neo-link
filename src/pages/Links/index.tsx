@@ -27,7 +27,9 @@ const Links = () => {
     };
     const fetchUserData = async () => {
       const response = await getUserData(userId);
-      setUserData(response);
+      document.documentElement.style.setProperty("--primary-color-1", response[0]["primary-color-1"]);
+      document.documentElement.style.setProperty("--primary-color-2", response[0]["primary-color-2"]);
+      document.documentElement.style.setProperty("--primary-color-3", response[0]["primary-color-3"]);
     };
     fetchLinks();
     fetchUserData();
@@ -55,7 +57,7 @@ const Links = () => {
 
   return (linkElements) ? (
     <div className="links-wrapper flex flex-col items-center justify-evenly bg-primary-color-1 h-full w-full">
-      <Navbar />
+      <Navbar isSignedIn={user.isSignedIn}/>
       <div className="profile flex flex-col justify-evenly gap-[5rem]">
         <div
           className="relative head h-[30vh] w-[95vw] flex justify-center items-end rounded-[1rem] border-[1px] bg-cover"

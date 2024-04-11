@@ -12,13 +12,16 @@ import {
   DialogBody,
   DialogHeader,
   DialogFooter,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import { sendContact, sendLink } from "@/supabase/supabase";
 import { EditIcon } from "@/assets";
 
-export function AddLink(props: {userId: string | undefined}) {
+export function AddLink(props: { userId: string | undefined }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState("react");
 
   const [contactData, setContactData] = useState({
     title: "",
@@ -36,7 +39,6 @@ export function AddLink(props: {userId: string | undefined}) {
 
   const handleOpen = () => setOpen(!open);
 
-  // Event handler for the first form
   const handleContactChange = (e: any) => {
     const { name, value } = e.target;
     setContactData((prevData) => ({
@@ -45,7 +47,6 @@ export function AddLink(props: {userId: string | undefined}) {
     }));
   };
 
-  // Event handler for the second form
   const handleLinkChange = (e: any) => {
     const { name, value } = e.target;
     setLinkData((prevData) => ({
@@ -58,7 +59,9 @@ export function AddLink(props: {userId: string | undefined}) {
     e.preventDefault();
     setLoading(true);
     const data = type === "contact" ? contactData : linkData;
-    (type === "contact" ? await sendContact(data, props.userId) : await sendLink(data, props.userId));
+    type === "contact"
+      ? await sendContact(data, props.userId)
+      : await sendLink(data, props.userId);
     setOpen(false);
     setLoading(false);
     // window.location.replace("/links");
@@ -71,7 +74,7 @@ export function AddLink(props: {userId: string | undefined}) {
         variant="gradient"
         className="flex justify-center items-center p-[1rem]"
       >
-        <img src={EditIcon} className="h-4"/>
+        <img src={EditIcon} className="h-4" />
       </Button>
       <Dialog open={open} handler={handleOpen}>
         <DialogHeader>Add Link</DialogHeader>
@@ -86,7 +89,7 @@ export function AddLink(props: {userId: string | undefined}) {
               </Tab>
             </TabsHeader>
             <TabsBody
-              className="!overflow-x-hidden !overflow-y-visible"
+              className="!overflow-x-hidden !overflow-y-visible noscrollbar"
               animate={{
                 initial: {
                   x: type === "contact" ? 400 : -400,
@@ -105,7 +108,7 @@ export function AddLink(props: {userId: string | undefined}) {
                   onSubmit={handleSubmit}
                 >
                   <div className="mb-1 flex flex-col gap-6">
-                    <Typography
+                    {/* <Typography
                       variant="h6"
                       color="blue-gray"
                       className="-mb-3"
@@ -122,7 +125,23 @@ export function AddLink(props: {userId: string | undefined}) {
                       name="title"
                       value={contactData.title}
                       onChange={handleContactChange}
-                    />
+                    /> */}
+                    <Select
+                      label="Select Contact"
+                      name="title"
+                      value={contactData.title}
+                      onChange={(value) => {
+                        setContactData((prevData) => ({
+                          ...prevData,
+                          title: value,
+                        }));
+                      }}
+                    >
+                      <Option value="phone">Phone</Option>
+                      <Option value="website">Website</Option>
+                      <Option value="mail">Email</Option>
+                      {/* <Option value="">Phone</Option> */}
+                    </Select>
                     <Typography
                       variant="h6"
                       color="blue-gray"
@@ -176,7 +195,7 @@ export function AddLink(props: {userId: string | undefined}) {
                   onSubmit={handleSubmit}
                 >
                   <div className="mb-1 flex flex-col gap-6">
-                    <Typography
+                    {/* <Typography
                       variant="h6"
                       color="blue-gray"
                       className="-mb-3"
@@ -193,7 +212,24 @@ export function AddLink(props: {userId: string | undefined}) {
                       name="title"
                       value={linkData.title}
                       onChange={handleLinkChange}
-                    />
+                    /> */}
+                    <Select
+                      label="Select Link"
+                      name="title"
+                      value={contactData.title}
+                      onChange={(value) => {
+                        setLinkData((prevData) => ({
+                          ...prevData,
+                          title: value,
+                        }));
+                      }}
+                    >
+                      <Option value="instagram">Phone</Option>
+                      <Option value="whatsapp">Website</Option>
+                      <Option value="linkedin">Email</Option>
+                      <Option value="facebook">Facebook</Option>
+                      {/* <Option value="">Phone</Option> */}
+                    </Select>
                     <Typography
                       variant="h6"
                       color="blue-gray"

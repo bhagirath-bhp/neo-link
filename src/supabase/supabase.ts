@@ -83,15 +83,31 @@ export const getUserData = async (userId: string | undefined) => {
     return error;
   }
 };
+
 export const listLinks = async (userId: string | undefined) => {
   const { data, error } = await client
     .from("Links")
     .select()
     .eq("user_id", userId);
   if (!error) {
+    console.log(data)
     return data;
   } else {
+    console.log(error)
     return error;
+  }
+};
+export const sendColorPallete = async (userId: string, colourPallete: any) => {
+  if (!userId) return;
+  const { data, error } = await authClient.from("users").update({
+    "primary-color-1": colourPallete["primary-color-1"],
+    "primary-color-2": colourPallete["primary-color-2"],
+    "primary-color-3": colourPallete["primary-color-3"],
+  }).eq("user_id", userId);
+  if (error) {
+    return error.message;
+  } else {
+    return data;
   }
 };
 export const sendLink = async (

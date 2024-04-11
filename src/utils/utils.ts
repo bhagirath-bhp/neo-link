@@ -47,3 +47,15 @@ export const generateProfileURL = (userId: string | undefined) => {
   const profileURL = import.meta.env.VITE_APP_LINKSPAGE_URL + `/${userId}`
   return profileURL;
 }
+
+export const generateHandleURL = (url: string, type: string) => {
+  if(type==="phone"){
+    return `tel:${url}`;
+  }
+  else if(type==="mail"){
+    return `mailto:${url}`;
+  }
+  else{
+    return url;
+  }
+}

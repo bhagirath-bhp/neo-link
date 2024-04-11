@@ -2,6 +2,7 @@ import { DeleteWhiteIcon } from "@/assets";
 import { deleteLink } from "@/supabase/supabase";
 import { handleIcons } from "@/utils/utils";
 
+
 const LinkCard = (props: {
   title: string;
   handleURL: string;
@@ -10,11 +11,11 @@ const LinkCard = (props: {
   isSignedIn: boolean | undefined;
 }) => {
   const iconURL: string = handleIcons[`${props.title.toLowerCase()}`];
-
   const handleDelete = async (e) => {
     e.preventDefault();
-    const response = await deleteLink(props.linkId, props.userId);
-    console.log(response);
+    // const response = await deleteLink(props.linkId, props.userId);
+    await deleteLink(props.linkId, props.userId);
+    // console.log(response);
   };
   return (
     <a href={props.handleURL} className="cursor-pointer" target="_blank">

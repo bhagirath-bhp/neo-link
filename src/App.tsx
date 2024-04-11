@@ -3,11 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Links from "./pages/Links";
 import SignUpPage from "./pages/SignUp";
 import SignInPage from "./pages/SignIn";
-import { useUser } from "@clerk/clerk-react";
 
 
 function App() {
-  const {isSignedIn} = useUser();
   return (
     <div className="overflow-x-hidden h-full overflow-y-scroll noscrollbar bg-black">
       <BrowserRouter>
