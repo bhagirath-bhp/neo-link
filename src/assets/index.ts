@@ -29,3 +29,7 @@ export { default as GalleryBlackIcon } from "/icons/gallery-black.svg";
 export { default as GalleryWhiteIcon } from "/icons/gallery-white.svg";
 export { default as GalleryBlackPNG } from "/images/gallery-black.png";
 export { default as GalleryWhitePNG } from "/images/gallery-white.png";
+export { default as QRIcon } from "/icons/qricon.svg";
+export { default as CopyIcon } from "/icons/copyicon.svg";
+export { default as DoneIcon } from "/icons/doneicon.svg";
+export { default as ShareIcon } from "/icons/shareicon.svg";

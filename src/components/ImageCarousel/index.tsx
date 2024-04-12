@@ -6,11 +6,9 @@ import {
   DialogFooter,
   DialogHeader,
   IconButton,
-  Input,
 } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import {
-  deleteImage,
   listImageURLs,
   uploadImageAndSaveURL,
 } from "@/supabase/supabase";
@@ -19,11 +17,11 @@ import { useUser } from "@clerk/clerk-react";
 // import { DeleteWhiteIcon } from "@/assets";
 
 
-const ImageCarousel = (props) => {
+const ImageCarousel = (props: any) => {
   const [open, setOpen] = useState(false);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [imageFile, setImageFile] = useState<File>();
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  const [imageURLs, setImageURLs] = useState<any>([]);
   const { isSignedIn } = useUser();
   const userId = props.userId;
   useEffect(() => {
@@ -36,14 +34,14 @@ const ImageCarousel = (props) => {
 
   const handleOpen = () => setOpen(!open);
   const handleUploadOpen = () => setIsUploadOpen(!isUploadOpen);
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     setImageFile(file);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const response = await uploadImageAndSaveURL(imageFile, userId);
-    if (response.success) {
+    if (response) {
       setIsUploadOpen(false);
     }
   };
@@ -89,7 +87,7 @@ const ImageCarousel = (props) => {
           {imageURLs && (
             <Carousel
               className="rounded-xl max-h-[25rem]"
-              prevArrow={({ handlePrev }) => (
+              prevArrow={({ handlePrev }: any) => (
                 <IconButton
                   variant="text"
                   color="white"
@@ -113,7 +111,7 @@ const ImageCarousel = (props) => {
                   </svg>
                 </IconButton>
               )}
-              nextArrow={({ handleNext }) => (
+              nextArrow={({ handleNext }: any) => (
                 <IconButton
                   variant="text"
                   color="white"
@@ -149,7 +147,7 @@ const ImageCarousel = (props) => {
                 <div className="max-w-2xl mx-auto">
                   <label
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                    for="file_input"
+                    htmlFor="file_input"
                   >
                     Upload file
                   </label>

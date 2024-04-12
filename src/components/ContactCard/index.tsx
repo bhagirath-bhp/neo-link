@@ -48,7 +48,7 @@ const ContactCard = (props: {
           >
             <div className="w-full flex gap-[0.5rem] flex-1">
               <IconButton
-                className="bg-primary-color-2 p-[0.5rem] rounded-sm"
+                className="bg-primary-color-2 p-[0.5rem] rounded-sm shadow-none hover:shadow-none"
                 ripple={false}
                 color="white"
               >
@@ -59,7 +59,7 @@ const ContactCard = (props: {
               <a href={contactURL} target="_blank" className="bg-primary-color-2 p-[0.5rem] rounded-sm w-full flex justify-between items-center text-primary-color-3">
                 <span>{contact.value}</span>
                 {/* <img src={ExLinkBlackIcon} className="h-5" /> */}
-                <div className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${ExLinkBlackIcon}) center / contain no-repeat padding-box` }}></div>
+                <IconButton ripple={false} className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${ExLinkBlackIcon}) center / contain no-repeat padding-box` }}></IconButton>
               </a>
               {props.isSignedIn && (
                 <ListItemSuffix className="bg-primary-color-2 rounded-sm">

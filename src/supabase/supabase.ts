@@ -1,4 +1,3 @@
-import Cookie from "js-cookie";
 import { createClient } from "@supabase/supabase-js";
 
 // Add clerk to Window to avoid type errors
@@ -200,7 +199,7 @@ export const deleteContact = async (contactId: string, userId: string) => {
 };
 
 export const uploadImageAndSaveURL = async (
-  imageFile: File,
+  imageFile: File | undefined,
   userId: string
 ) => {
   if (!imageFile || !userId) {

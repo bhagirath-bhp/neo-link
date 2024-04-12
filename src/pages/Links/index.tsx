@@ -80,7 +80,6 @@ const Links = () => {
           <div
             className="profile-img h-[7rem] w-[7rem] rounded-full overflow-hidden border-[5px] translate-y-[3rem]"
             style={{
-              // background: `url("${user?.isLoaded && user.user?.imageUrl || ""}") no-repeat center`,
               background: `url("${(Array.isArray(userData)) ? userData[0].profileURL : ""}") no-repeat center / cover`,
             }}
             
@@ -89,8 +88,6 @@ const Links = () => {
           <div className="absolute bottom-2 right-2">
             {(user.isLoaded && user.isSignedIn) && <AddBanner userId={userId}/>}
           </div>
-          {/* <span className="absolute h-full w-full top-0 left-0 rounded-[1rem] border-primary-color-2 bg-primary-color-1 z-[-9] blur-sm opacity-25"></span>
-          <div className="absolute h-[8rem] w-[8rem] rounded-full overflow-hidden border-b-[2px] translate-y-[3.5rem]"></div> */}
         </div>
         <div className="profile-data flex flex-col items-center">
           <h3 className="text-[3rem] text-primary-color-3">

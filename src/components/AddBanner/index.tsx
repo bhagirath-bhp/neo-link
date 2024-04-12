@@ -39,7 +39,7 @@ const AddBanner = (props: {userId: string | any}) => {
             <div className="max-w-2xl mx-auto">
               <label
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                for="file_input"
+                htmlFor="file_input"
               >
                 Upload file
               </label>
