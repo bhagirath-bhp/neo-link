@@ -26,7 +26,8 @@ const Links = () => {
       setLinks(response);
     };
     const fetchUserData = async () => {
-      const response = await getUserData(userId);
+      const response: any = await getUserData(userId);
+      setUserData(response);
       document.documentElement.style.setProperty("--primary-color-1", response[0]["primary-color-1"]);
       document.documentElement.style.setProperty("--primary-color-2", response[0]["primary-color-2"]);
       document.documentElement.style.setProperty("--primary-color-3", response[0]["primary-color-3"]);
@@ -67,8 +68,7 @@ const Links = () => {
             className="profile-img h-[7rem] w-[7rem] rounded-full overflow-hidden border-[5px] translate-y-[3rem]"
             style={{
               // background: `url("${user?.isLoaded && user.user?.imageUrl || ""}") no-repeat center`,
-              background: `url("${(Array.isArray(userData)) ? userData[0].profileURL : ""}") no-repeat center`,
-              backgroundSize: "cover"
+              background: `url("${(Array.isArray(userData)) ? userData[0].profileURL : ""}") no-repeat center / cover`,
             }}
             
           >

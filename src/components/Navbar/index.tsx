@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/clerk-react"
 import ThemeColorProvider from "../ThemeColorProvider";
 
-const Navbar = (props: {isSignedIn: boolean}) => {
+const Navbar = (props: {isSignedIn: boolean | undefined}) => {
   const signInUrl = import.meta.env.VITE_APP_SIGNIN_URL;
   return (
     <div className="flex justify-end w-full gap-[1rem] p-[1rem]">

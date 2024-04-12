@@ -8,6 +8,7 @@ interface Colors {
 
 const ThemeColorProvider = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const user = useUser();
   const [colors, setColors] = useState<Colors>({
     "primary-color-1": "#ffffff",
@@ -23,21 +24,21 @@ const ThemeColorProvider = () => {
     document.documentElement.style.setProperty(`--${colorName}`, newColor);
   };
 
-  const onSubmit = async (e) => { 
+  const onSubmit = async (e: any) => { 
     e.preventDefault(); 
-    console.log("hii . . .", user.user.id)
+    setLoading(true);
     const response = await sendColorPallete(user.user.id, colors);
+    if(response){
+      setLoading(false);
+      setTimeout(() => {
+        setIsActive(false);
+      }, 100);
+    }
   } 
 
   return (
-    <div
-      className="container relative cursor-pointer"
-      onClick={() => {
-        setIsActive(!isActive);
-      }}
-    >
-      {/* <h1>Color Picker</h1> */}
-      <div className="flex justify-center items-center gap-[0.5rem]">
+    <div className="container relative cursor-pointer">
+      <div className="flex justify-center items-center gap-[0.5rem]" onClick={() => {setIsActive(!isActive)}}>
         <div className="border-[1px] border-[#A1A1A1] h-[2rem] w-[2rem] rounded-full bg-gradient-to-r from-primary-color-1 to-primary-color-2">
         </div>
         Theme
@@ -75,7 +76,7 @@ const ThemeColorProvider = () => {
               ></div>
             ))}
           </div>
-          <Button size="sm" type="submit" >Save</Button>
+          <Button size="sm" type="submit" loading={loading}>Save</Button>
         </form>
       </div>
     </div>

@@ -33,7 +33,7 @@ export const generateGrad = () => {
 }
 
 
-export const handleIcons = {
+export const handleIcons: any = {
   "instagram": IgLogoWhiteOutlined,
   "whatsapp": WpLogoWhiteOutlined,
   "facebook": FbLogoWhiteOutlined,

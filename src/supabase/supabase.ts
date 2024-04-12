@@ -98,21 +98,18 @@ export const listLinks = async (userId: string | undefined) => {
   }
 };
 export const sendColorPallete = async (userId: string, colourPallete: any) => {
+  console.log(userId, colourPallete)
   if (!userId) return;
-  const { data, error } = await authClient.from("users").update({
+  const response = await authClient.from("users").update({
     "primary-color-1": colourPallete["primary-color-1"],
     "primary-color-2": colourPallete["primary-color-2"],
     "primary-color-3": colourPallete["primary-color-3"],
   }).eq("user_id", userId);
-  if (error) {
-    return error.message;
-  } else {
-    return data;
-  }
+  return response
 };
 export const sendLink = async (
-  formData: { title: string; handleURL: string; logoURL: string },
-  userId: string
+  formData: { title: string; handleURL?: string; logoURL: string },
+  userId: string | any
 ) => {
   if (!formData.title) return;
   const { data, error } = await authClient.from("Links").insert({
@@ -150,8 +147,8 @@ export const listContacts = async (userId: string | undefined) => {
   }
 };
 export const sendContact = async (
-  formData: { title: string; value: string; logoURL?: string },
-  userId: string
+  formData: { title: string; value?: string; logoURL?: string },
+  userId: string | any
 ) => {
   if (!formData.title) return;
   const { data, error } = await authClient.from("Contacts").insert({
@@ -192,7 +189,7 @@ export const uploadImageAndSaveURL = async (
   if (!imageFile || !userId) {
     return "Image and UserId are required";
   }
-  const { data, error } = await authClient.storage
+  const { data, error }  = await authClient.storage
     .from("images")
     .upload(`images/${userId}/${Date.now() + imageFile.name}`, imageFile);
 
@@ -230,8 +227,8 @@ export const listImageURLs = async (userId: string) => {
     const imageURLs = images.map((image) => bucketURL + image.imageURL);
     return imageURLs;
   } catch (error) {
-    console.error("Error fetching image URLs:", error.message);
-    return error.message;
+    console.error("Error fetching image URLs:", error);
+    return error;
   }
 };
 export const deleteImage = async (
@@ -239,7 +236,7 @@ export const deleteImage = async (
   imageURL: string,
   userId: string
 ) => {
-  const { data, error } = await authClient
+  const { error } = await authClient
     .from("Images")
     .delete()
     .eq("user_id", userId)
@@ -275,7 +272,7 @@ export const checkUserExists = async (userId: string) => {
   }
 };
 
-export const saveUserDetails = async (userData) => {
+export const saveUserDetails = async (userData: any) => {
   try {
     const { exists, error } = await checkUserExists(userData.user_id);
 
@@ -298,7 +295,7 @@ export const saveUserDetails = async (userData) => {
       return null;
     }
   } catch (error) {
-    console.error("Error saving user details:", error.message);
+    console.error("Error saving user details:", error);
     return null;
   }
 };

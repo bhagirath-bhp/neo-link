@@ -21,7 +21,6 @@ import { EditIcon } from "@/assets";
 export function AddLink(props: { userId: string | undefined }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState("react");
 
   const [contactData, setContactData] = useState({
     title: "",
@@ -217,7 +216,7 @@ export function AddLink(props: { userId: string | undefined }) {
                       label="Select Link"
                       name="title"
                       value={contactData.title}
-                      onChange={(value) => {
+                      onChange={(value: any) => {
                         setLinkData((prevData) => ({
                           ...prevData,
                           title: value,

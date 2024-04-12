@@ -1,4 +1,4 @@
-import { DeleteBlackIcon, ExLinkBlackIcon, TrashIcon } from "@/assets";
+import { DeleteBlackIcon, ExLinkBlackIcon } from "@/assets";
 import {
   List,
   ListItem,
@@ -10,7 +10,6 @@ import { deleteContact, listContacts } from "@/supabase/supabase";
 import { useEffect, useState } from "react";
 import Loading from "../Loading";
 import { generateHandleURL, handleIcons } from "@/utils/utils";
-import { title } from "process";
 
 
 const ContactCard = (props: {
@@ -38,11 +37,11 @@ const ContactCard = (props: {
 
   const listItemSet =
     Array.isArray(contacts) &&
-    contacts.map((contact: {id: string, title: string, value: string, user_id: string}, index: string) => {
-      const iconURL: string = handleIcons[`${contact.title.toLowerCase()}`];
+    contacts.map((contact: {id: string, title: string, value: string, user_id: string}, index: number) => {
+      const iconURL: any = handleIcons[`${contact.title.toLowerCase()}`];
       const contactURL: string = generateHandleURL(contact.value, contact.title)
       return (
-        <a key={index} href={contactURL} target="_blank">
+        <div key={index}>
           <ListItem
             ripple={false}
             className="py-1 px-2 bg-primary-color-1 hover:bg-primary-color-1"
@@ -53,13 +52,15 @@ const ContactCard = (props: {
                 ripple={false}
                 color="white"
               >
-                <img src={iconURL} className="h-5" />
+                {/* <img src={iconURL} className="h-5" /> */}
+                <div className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${iconURL}) center / contain no-repeat padding-box` }}></div>
                 {/* {contact.title} */}
               </IconButton>
-              <div className="bg-primary-color-2 p-[0.5rem] rounded-sm w-full flex justify-between items-center text-primary-color-3">
+              <a href={contactURL} target="_blank" className="bg-primary-color-2 p-[0.5rem] rounded-sm w-full flex justify-between items-center text-primary-color-3">
                 <span>{contact.value}</span>
-                <img src={ExLinkBlackIcon} className="h-5" />
-              </div>
+                {/* <img src={ExLinkBlackIcon} className="h-5" /> */}
+                <div className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${ExLinkBlackIcon}) center / contain no-repeat padding-box` }}></div>
+              </a>
               {props.isSignedIn && (
                 <ListItemSuffix className="bg-primary-color-2 rounded-sm">
                   <IconButton
@@ -69,14 +70,15 @@ const ContactCard = (props: {
                       handleDelete(contact.id, contact.user_id);
                     }}
                   >
-                    <img src={DeleteBlackIcon} />
+                    {/* <img src={DeleteBlackIcon} /> */}
+                    <div className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${DeleteBlackIcon}) center / contain no-repeat padding-box` }}></div>
                   </IconButton>
                 </ListItemSuffix>
               )}
             </div>
           </ListItem>
           <div className="-inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-20 group-hover:opacity-45 transition duration-1000 group-hover:duration-200"></div>
-        </a>
+        </div>
       );
     });
 
