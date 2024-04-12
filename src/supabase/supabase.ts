@@ -71,17 +71,28 @@ export const client = createClerkSupabaseClient();
 export const authClient = createAuthenticClerkSupabaseClient();
 
 export const getUserData = async (userId: string | undefined) => {
-
   const { data, error } = await client
     .from("users")
     .select()
     .eq("user_id", userId);
-    
+
   if (!error) {
     return data;
   } else {
     return error;
   }
+};
+
+export const getUserIdWithUserName = async (username: string | undefined) => {
+  const { data, error } = await client
+    .from("users")
+    .select("user_id")
+    .eq("username", username);
+    if (!error) {
+      return data;
+    } else {
+      return error;
+    }
 };
 
 export const listLinks = async (userId: string | undefined) => {
@@ -90,22 +101,25 @@ export const listLinks = async (userId: string | undefined) => {
     .select()
     .eq("user_id", userId);
   if (!error) {
-    console.log(data)
+    console.log(data);
     return data;
   } else {
-    console.log(error)
+    console.log(error);
     return error;
   }
 };
 export const sendColorPallete = async (userId: string, colourPallete: any) => {
-  console.log(userId, colourPallete)
+  console.log(userId, colourPallete);
   if (!userId) return;
-  const response = await authClient.from("users").update({
-    "primary-color-1": colourPallete["primary-color-1"],
-    "primary-color-2": colourPallete["primary-color-2"],
-    "primary-color-3": colourPallete["primary-color-3"],
-  }).eq("user_id", userId);
-  return response
+  const response = await authClient
+    .from("users")
+    .update({
+      "primary-color-1": colourPallete["primary-color-1"],
+      "primary-color-2": colourPallete["primary-color-2"],
+      "primary-color-3": colourPallete["primary-color-3"],
+    })
+    .eq("user_id", userId);
+  return response;
 };
 export const sendLink = async (
   formData: { title: string; handleURL?: string; logoURL: string },
@@ -125,13 +139,16 @@ export const sendLink = async (
     return data;
   }
 };
-export const deleteLink = async (linkId: string, userId: string | undefined) => {
+export const deleteLink = async (
+  linkId: string,
+  userId: string | undefined
+) => {
   const response = await authClient
     .from("Links")
     .delete()
     .eq("user_id", userId)
     .eq("id", linkId);
-  return response
+  return response;
 };
 
 export const listContacts = async (userId: string | undefined) => {
@@ -166,7 +183,7 @@ export const sendContact = async (
 };
 
 export const deleteContact = async (contactId: string, userId: string) => {
-  console.log(contactId, userId)
+  console.log(contactId, userId);
   const response = await authClient
     .from("Contacts")
     .delete()
@@ -179,7 +196,7 @@ export const deleteContact = async (contactId: string, userId: string) => {
   //   console.log("success")
   //   return data;
   // }
-  return response
+  return response;
 };
 
 export const uploadImageAndSaveURL = async (
@@ -189,12 +206,11 @@ export const uploadImageAndSaveURL = async (
   if (!imageFile || !userId) {
     return "Image and UserId are required";
   }
-  const { data, error }  = await authClient.storage
+  const { data, error } = await authClient.storage
     .from("images")
     .upload(`images/${userId}/${Date.now() + imageFile.name}`, imageFile);
 
   if (error) {
-    
     console.error("Error uploading image:", error.message);
     return;
   }
@@ -203,6 +219,36 @@ export const uploadImageAndSaveURL = async (
   const { data: imageData, error: imageError } = await authClient
     .from("Images")
     .insert([{ user_id: userId, imageURL: imageURL }]);
+
+  if (imageError) {
+    console.error("Error saving imageURL to database:", imageError.message);
+    return imageError.message;
+  } else {
+    console.log("Image uploaded and URL saved successfully:", imageURL);
+    return { success: true, imageData: imageData };
+  }
+};
+export const uploadBannerAndSaveURL = async (
+  imageFile: File,
+  userId: string
+) => {
+  if (!imageFile || !userId) {
+    return "Image and UserId are required";
+  }
+  const { data, error } = await authClient.storage
+    .from("images")
+    .upload(`images/${userId}/${Date.now() + imageFile.name}`, imageFile);
+
+  if (error) {
+    console.error("Error uploading image:", error.message);
+    return;
+  }
+  const imageURL = data.fullPath;
+
+  const { data: imageData, error: imageError } = await authClient
+    .from("users")
+    .update({bannerURL: imageURL})
+    .eq("user_id", userId);
 
   if (imageError) {
     console.error("Error saving imageURL to database:", imageError.message);

@@ -223,9 +223,9 @@ export function AddLink(props: { userId: string | undefined }) {
                         }));
                       }}
                     >
-                      <Option value="instagram">Phone</Option>
-                      <Option value="whatsapp">Website</Option>
-                      <Option value="linkedin">Email</Option>
+                      <Option value="instagram">Instagram</Option>
+                      <Option value="whatsapp">Whatsapp</Option>
+                      <Option value="linkedin">Linked In</Option>
                       <Option value="facebook">Facebook</Option>
                       {/* <Option value="">Phone</Option> */}
                     </Select>

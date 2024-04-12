@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
 import Loading from "@/components/Loading";
-import { getUserData, listLinks } from "@/supabase/supabase";
+import { getUserData, getUserIdWithUserName, listLinks } from "@/supabase/supabase";
 import { AddLink } from "@/components/AddLink";
 import { Banner1 } from "@/assets";
 import Navbar from "@/components/Navbar";
@@ -10,34 +10,45 @@ import LinkCard from "@/components/LinkCard";
 import ImageCarousel from "@/components/ImageCarousel";
 import ContactCard from "@/components/ContactCard";
 import { useUser } from "@clerk/clerk-react";
-
+import AddBanner from "@/components/AddBanner";
 
 const Links = () => {
   const [links, setLinks] = useState<any>();
   const user = useUser();
   const [userData, setUserData] = useState<any>();
-  const {userId } = useParams();
+  const [userId, setUserId] = useState<string | any>("");
+  const {username} = useParams();
+  const bucketURL = import.meta.env.VITE_SUPABASE_BUCKET_URL;
 
 
-
-  useEffect(() => {
-    const fetchLinks = async () => {
-      const response = await listLinks(userId);
-      setLinks(response);
-    };
-    const fetchUserData = async () => {
-      const response: any = await getUserData(userId);
-      setUserData(response);
-      document.documentElement.style.setProperty("--primary-color-1", response[0]["primary-color-1"]);
-      document.documentElement.style.setProperty("--primary-color-2", response[0]["primary-color-2"]);
-      document.documentElement.style.setProperty("--primary-color-3", response[0]["primary-color-3"]);
-    };
-    fetchLinks();
-    fetchUserData();
+  useEffect(()=>{
+    const fetchUserId = async () => {
+      const response = await getUserIdWithUserName(username);
+      setUserId(response[0].user_id);
+    }
+    fetchUserId();
     setTimeout(()=>{
 
     }, 2000)
-  }, []);
+  }, [])
+  useEffect(() => {
+    if(userId){
+      const fetchLinks = async () => {
+        const response = await listLinks(userId);
+        setLinks(response);
+      };
+      const fetchUserData = async () => {
+        const response: any = await getUserData(userId);
+        console.log(response[0].bannerURL)
+        setUserData(response);
+        document.documentElement.style.setProperty("--primary-color-1", response[0]["primary-color-1"]);
+        document.documentElement.style.setProperty("--primary-color-2", response[0]["primary-color-2"]);
+        document.documentElement.style.setProperty("--primary-color-3", response[0]["primary-color-3"]);
+      };
+      fetchLinks();
+      fetchUserData();
+    }
+  }, [userId]);
 
 
 
@@ -61,8 +72,10 @@ const Links = () => {
       <Navbar isSignedIn={user.isSignedIn}/>
       <div className="profile flex flex-col justify-evenly gap-[5rem]">
         <div
-          className="relative head h-[30vh] w-[95vw] flex justify-center items-end rounded-[1rem] border-[1px] bg-cover"
-          style={{ background: `url("${Banner1}")` }}
+          className="relative head h-[30vh] w-[95vw] flex justify-center items-end rounded-[1rem] border-[1px]"
+          style={{
+            background: `url("${(Array.isArray(userData)) ? (bucketURL + userData[0].bannerURL) || Banner1 : ""}") no-repeat center / cover`,
+          }}
         >
           <div
             className="profile-img h-[7rem] w-[7rem] rounded-full overflow-hidden border-[5px] translate-y-[3rem]"
@@ -73,8 +86,11 @@ const Links = () => {
             
           >
           </div>
-          <span className="absolute h-full w-full top-0 left-0 rounded-[1rem] border-primary-color-2 bg-primary-color-1 z-[-9] blur-sm opacity-25"></span>
-          <div className="absolute h-[8rem] w-[8rem] rounded-full overflow-hidden border-b-[2px] translate-y-[3.5rem]"></div>
+          <div className="absolute bottom-2 right-2">
+            {(user.isLoaded && user.isSignedIn) && <AddBanner userId={userId}/>}
+          </div>
+          {/* <span className="absolute h-full w-full top-0 left-0 rounded-[1rem] border-primary-color-2 bg-primary-color-1 z-[-9] blur-sm opacity-25"></span>
+          <div className="absolute h-[8rem] w-[8rem] rounded-full overflow-hidden border-b-[2px] translate-y-[3.5rem]"></div> */}
         </div>
         <div className="profile-data flex flex-col items-center">
           <h3 className="text-[3rem] text-primary-color-3">

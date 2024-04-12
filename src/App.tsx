@@ -13,7 +13,7 @@ function App() {
           <Route path="/" element={<p className="text-white">hii</p>}></Route>
           <Route path="/signin" element={<SignInPage />}></Route>
           <Route path="/signup" element={<SignUpPage />}></Route>
-          <Route path="/links/:userId" element={<Links />}></Route>
+          <Route path="/links/:username" element={<Links />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

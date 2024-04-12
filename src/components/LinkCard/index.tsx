@@ -33,7 +33,8 @@ const LinkCard = (props: {
             </a>
             {props.isSignedIn && (
               <div onClick={handleDelete}>
-                <img src={DeleteWhiteIcon} className="h-4" />
+                {/* <img src={DeleteWhiteIcon} className="h-4" /> */}
+                <div className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${DeleteWhiteIcon}) center / contain no-repeat padding-box` }}></div>
               </div>
             )}
           </div>
