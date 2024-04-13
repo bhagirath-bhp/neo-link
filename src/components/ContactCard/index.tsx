@@ -5,6 +5,7 @@ import {
   ListItemSuffix,
   Card,
   IconButton,
+  Button
 } from "@material-tailwind/react";
 import { deleteContact, listContacts } from "@/supabase/supabase";
 import { useEffect, useState } from "react";
@@ -59,7 +60,7 @@ const ContactCard = (props: {
               <a href={contactURL} target="_blank" className="bg-primary-color-2 p-[0.5rem] rounded-sm w-full flex justify-between items-center text-primary-color-3">
                 <span>{contact.value}</span>
                 {/* <img src={ExLinkBlackIcon} className="h-5" /> */}
-                <IconButton ripple={false} className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${ExLinkBlackIcon}) center / contain no-repeat padding-box` }}></IconButton>
+                <Button children="" ripple={false} className="bg-primary-color-3 h-5 w-5" style={{ mask: `url(${ExLinkBlackIcon}) center / contain no-repeat padding-box` }}></Button>
               </a>
               {props.isSignedIn && (
                 <ListItemSuffix className="bg-primary-color-2 rounded-sm">
