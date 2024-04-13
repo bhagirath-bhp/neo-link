@@ -24,7 +24,9 @@ const Links = () => {
   useEffect(()=>{
     const fetchUserId = async () => {
       const response = await getUserIdWithUserName(username);
-      setUserId(response[0].user_id);
+      if(Array.isArray(response)){
+        setUserId(response[0].user_id);
+      }
     }
     fetchUserId();
     setTimeout(()=>{

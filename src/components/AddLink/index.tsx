@@ -40,7 +40,7 @@ export function AddLink(props: { userId: string | undefined }) {
 
   const handleContactChange = (e: any) => {
     const { name, value } = e.target;
-    setContactData((prevData) => ({
+    setContactData((prevData: any) => ({
       ...prevData,
       [name]: value,
     }));
@@ -48,7 +48,7 @@ export function AddLink(props: { userId: string | undefined }) {
 
   const handleLinkChange = (e: any) => {
     const { name, value } = e.target;
-    setLinkData((prevData) => ({
+    setLinkData((prevData: any) => ({
       ...prevData,
       [name]: value,
     }));
@@ -130,7 +130,7 @@ export function AddLink(props: { userId: string | undefined }) {
                       name="title"
                       value={contactData.title}
                       onChange={(value: any) => {
-                        setContactData((prevData) => ({
+                        setContactData((prevData: any) => ({
                           ...prevData,
                           title: value,
                         }));
@@ -217,7 +217,7 @@ export function AddLink(props: { userId: string | undefined }) {
                       name="title"
                       value={contactData.title}
                       onChange={(value: any) => {
-                        setLinkData((prevData) => ({
+                        setLinkData((prevData: any) => ({
                           ...prevData,
                           title: value,
                         }));

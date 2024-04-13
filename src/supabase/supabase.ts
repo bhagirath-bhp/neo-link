@@ -205,7 +205,7 @@ export const uploadImageAndSaveURL = async (
   if (!imageFile || !userId) {
     return "Image and UserId are required";
   }
-  const { data, error } = await authClient.storage
+  const { data, error }: { data: {fullPAth: string} | any, error: any} = await authClient.storage
     .from("images")
     .upload(`images/${userId}/${Date.now() + imageFile.name}`, imageFile);
 
@@ -234,7 +234,7 @@ export const uploadBannerAndSaveURL = async (
   if (!imageFile || !userId) {
     return "Image and UserId are required";
   }
-  const { data, error } = await authClient.storage
+  const { data, error }: { data: {fullPAth: string} | any, error: any}= await authClient.storage
     .from("images")
     .upload(`images/${userId}/${Date.now() + imageFile.name}`, imageFile);
 
