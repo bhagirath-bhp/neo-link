@@ -10,7 +10,7 @@ declare global {
 function createClerkSupabaseClient() {
   return createClient(
     import.meta.env.VITE_SUPABASE_URL!,
-    import.meta.env.VITE_SUPABASE_KEY!
+    import.meta.env.VITE_SUPABASE_ANON_KEY!
     // {
     //   global: {
     //     // Get the Supabase token with a custom fetch method
@@ -39,7 +39,7 @@ function createClerkSupabaseClient() {
 function createAuthenticClerkSupabaseClient() {
   return createClient(
     import.meta.env.VITE_SUPABASE_URL!,
-    import.meta.env.VITE_SUPABASE_KEY!,
+    import.meta.env.VITE_SUPABASE_ANON_KEY!,
     {
       global: {
         // Get the Supabase token with a custom fetch method
