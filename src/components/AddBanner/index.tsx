@@ -31,7 +31,7 @@ const AddBanner = (props: {userId: string | any}) => {
       <IconButton onClick={handleUploadOpen} variant="gradient">
         <img src={EditIcon} alt="" />
       </IconButton>
-      <Dialog open={isUploadOpen} size="xs">
+      <Dialog open={isUploadOpen} size="xs" handler={setIsUploadOpen}>
         <form action="" onSubmit={handleSubmit}>
           <DialogBody>
             <div className="max-w-2xl mx-auto">

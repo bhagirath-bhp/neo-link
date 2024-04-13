@@ -101,7 +101,7 @@ const Home = () => {
                     <img src={QRIcon} alt="qr" className="h-5" />
                   </Button>
                 </ListItemSuffix>
-                <Dialog open={isQrOpen} size="sm">
+                <Dialog open={isQrOpen} size="sm" handler={setIsQrOpen}>
                   <DialogHeader>My NeoCode</DialogHeader>
                   <DialogBody className="flex justify-center">
                     <QRCode value={link ? link : ""} />
@@ -121,7 +121,7 @@ const Home = () => {
               </ListItem>
               <ListItem ripple={false} className="shadow-md">
                 <p>Share</p>
-                <Dialog open={isShareOpen} size="xs">
+                <Dialog open={isShareOpen} size="xs" handler={setIsShareOpen}>
                       <DialogBody>
                         <div className="flex justify-center gap-[2rem]">
                           <FacebookShareButton url={link} className="rounded-sm overflow-hidden">
