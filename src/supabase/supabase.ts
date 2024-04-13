@@ -228,7 +228,7 @@ export const uploadImageAndSaveURL = async (
   }
 };
 export const uploadBannerAndSaveURL = async (
-  imageFile: File,
+  imageFile: File | any,
   userId: string
 ) => {
   if (!imageFile || !userId) {

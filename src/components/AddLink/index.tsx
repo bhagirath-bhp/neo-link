@@ -22,13 +22,13 @@ export function AddLink(props: { userId: string | undefined }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [contactData, setContactData] = useState({
+  const [contactData, setContactData] = useState<any>({
     title: "",
-    contact: "",
+     value: "",
     logoURL: "",
   });
 
-  const [linkData, setLinkData] = useState({
+  const [linkData, setLinkData] = useState<any>({
     title: "",
     handleURL: "",
     logoURL: "",
@@ -129,7 +129,7 @@ export function AddLink(props: { userId: string | undefined }) {
                       label="Select Contact"
                       name="title"
                       value={contactData.title}
-                      onChange={(value) => {
+                      onChange={(value: any) => {
                         setContactData((prevData) => ({
                           ...prevData,
                           title: value,
@@ -156,7 +156,7 @@ export function AddLink(props: { userId: string | undefined }) {
                         className: "before:content-none after:content-none",
                       }}
                       name="value"
-                      value={contactData.handleURL}
+                      value={contactData.value}
                       onChange={handleContactChange}
                     />
                     <Typography

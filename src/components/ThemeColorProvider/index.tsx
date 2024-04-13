@@ -27,7 +27,7 @@ const ThemeColorProvider = () => {
   const onSubmit = async (e: any) => { 
     e.preventDefault(); 
     setLoading(true);
-    const response = await sendColorPallete(user.user.id, colors);
+    const response = (user.isLoaded && user.user) && await sendColorPallete(user?.user?.id, colors);
     if(response){
       setLoading(false);
       setTimeout(() => {

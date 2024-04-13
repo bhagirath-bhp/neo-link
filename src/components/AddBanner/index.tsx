@@ -1,27 +1,25 @@
 import { EditIcon } from "@/assets";
 import {
   uploadBannerAndSaveURL,
-  uploadImageAndSaveURL,
 } from "@/supabase/supabase";
 import {
   Button,
   Dialog,
   DialogBody,
   DialogFooter,
-  DialogHeader,
   IconButton,
 } from "@material-tailwind/react";
 import { useState } from "react";
 
 const AddBanner = (props: {userId: string | any}) => {
-  const [isUploadOpen, setIsUploadOpen] = useState<boolean>();
-  const [imageFile, setImageFile] = useState<File>();
+  const [isUploadOpen, setIsUploadOpen] = useState<boolean | any>();
+  const [imageFile, setImageFile] = useState<File | any>();
   const handleUploadOpen = () => setIsUploadOpen(!isUploadOpen);
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: any) => {
     const file = e.target.files[0];
     setImageFile(file);
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const response = await uploadBannerAndSaveURL(imageFile, props.userId);
     if (response) {
