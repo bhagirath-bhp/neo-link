@@ -70,7 +70,7 @@ const Links = () => {
 
 
   return (linkElements) ? (
-    <div className="links-wrapper flex flex-col items-center justify-evenly bg-primary-color-1 h-full w-full">
+    <div className="links-wrapper flex flex-col items-center justify-evenly bg-primary-color-1 h-full w-full overflow-y-scroll">
       <Navbar isSignedIn={user.isSignedIn}/>
       <div className="profile flex flex-col justify-evenly gap-[5rem]">
         <div
