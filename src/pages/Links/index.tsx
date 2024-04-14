@@ -11,6 +11,8 @@ import ImageCarousel from "@/components/ImageCarousel";
 import ContactCard from "@/components/ContactCard";
 import { useUser } from "@clerk/clerk-react";
 import AddBanner from "@/components/AddBanner";
+import LoaderOne from "@/components/LoaderOne";
+
 
 const Links = () => {
   const [links, setLinks] = useState<any>();
@@ -22,16 +24,15 @@ const Links = () => {
 
 
   useEffect(()=>{
-    const fetchUserId = async () => {
-      const response = await getUserIdWithUserName(username);
-      if(Array.isArray(response)){
-        setUserId(response[0].user_id);
-      }
-    }
-    fetchUserId();
     setTimeout(()=>{
-
-    }, 2000)
+      const fetchUserId = async () => {
+        const response = await getUserIdWithUserName(username);
+        if(Array.isArray(response)){
+          setUserId(response[0].user_id);
+        }
+      }
+      fetchUserId();
+    }, 1000)
   }, [])
   useEffect(() => {
     if(userId){
@@ -70,7 +71,7 @@ const Links = () => {
 
 
   return (linkElements) ? (
-    <div className="links-wrapper flex flex-col items-center justify-evenly bg-primary-color-1 h-full w-full overflow-y-scroll">
+    <div className="links-wrapper flex flex-col items-center justify-evenly bg-primary-color-1 h-full w-full overflow-y-scroll fancyscrollbar-1">
       <Navbar isSignedIn={user.isSignedIn}/>
       <div className="profile flex flex-col justify-evenly gap-[5rem]">
         <div
@@ -100,7 +101,7 @@ const Links = () => {
           <ContactCard userId={userId} isSignedIn={user.isSignedIn}/>
         </div>
       </div>
-      <div className="links flex flex-wrap gap-[2rem] justify-center w-[80%] py-[2rem] text-primary-color-3">
+      <div className="links flex flex-wrap gap-[2rem] justify-center w-[80%] py-[2rem] text-primary-color-3 shadow-xl mb-[2rem] rounded-lg">
         {linkElements}
       </div>
       <div className="absolute top-0 left-0 h-[100vh] w-[100vw] z-[-999] opacity-25 bg-primary-color-1"></div>
@@ -109,8 +110,8 @@ const Links = () => {
       }
     </div>
   ) : (
-    <div className="text-primary-color-3">
-      <Loading />
+    <div className="text-primary-color-3 flex justify-center items-center h-full">
+      <LoaderOne />
     </div>
   );
 };

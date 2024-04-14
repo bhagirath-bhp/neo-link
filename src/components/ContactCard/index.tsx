@@ -84,7 +84,7 @@ const ContactCard = (props: {
     });
 
   return (
-    <Card className="min-w-[60%] max-w-[80%] bg-primary-color-1">
+    <Card className="min-w-[60%] max-w-[80%] bg-primary-color-1 mb-[2rem]">
       <List>{Array.isArray(contacts) ? listItemSet : <Loading />}</List>
     </Card>
   );

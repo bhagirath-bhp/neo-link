@@ -28,6 +28,7 @@ import {
 } from "@material-tailwind/react";
 import { CopyIcon, DoneIcon, ExLinkBlackIcon, QRIcon, ShareIcon } from "@/assets";
 import QRCode from "react-qr-code";
+import LoaderOne from "@/components/LoaderOne";
 
 const Home = () => {
   const user = useUser();
@@ -37,12 +38,19 @@ const Home = () => {
   const [isQrOpen, setIsQrOpen] = useState<boolean>(false);
   const [isShareOpen, setIsShareOpen] = useState<boolean>(false);
   const [link, setLink] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(true)
 
   useEffect(() => {
     setLink(
       import.meta.env.VITE_APP_LINKSPAGE_URL + "/" + user?.user?.username
     );
   }, [user.isLoaded]);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoader(false);
+    }, 1000)
+    console.log(loader)
+  }, [])
 
   if (user.isLoaded && !user.isSignedIn) {
     setInterval(() => {
@@ -55,7 +63,6 @@ const Home = () => {
 
   const handleCopy = async () => {
     if (link) {
-      console.log("copying");
       try {
         await navigator.clipboard.writeText(link);
         setCopied(true);
@@ -69,7 +76,7 @@ const Home = () => {
       <div className="absolute top-[1rem] right-[1rem]">
         <UserButton />
       </div>
-      {user.isLoaded && user.isSignedIn ? (
+      {(user.isLoaded && user.isSignedIn && !loader) ? (
         <div>
           <Card className="w-96">
             <h1 className="text-2xl border-b-2 py-3 font-bold">My Neolink</h1>
@@ -170,7 +177,7 @@ const Home = () => {
           Redirecting in {countdown}
         </p>
       ) : (
-        <Loading />
+        <LoaderOne />
       )}
     </div>
   );
