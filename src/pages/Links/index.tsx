@@ -42,7 +42,6 @@ const Links = () => {
       };
       const fetchUserData = async () => {
         const response: any = await getUserData(userId);
-        console.log(response[0].bannerURL)
         setUserData(response);
         document.documentElement.style.setProperty("--primary-color-1", response[0]["primary-color-1"]);
         document.documentElement.style.setProperty("--primary-color-2", response[0]["primary-color-2"]);
@@ -56,17 +55,18 @@ const Links = () => {
 
 
   const linkElements =
-    Array.isArray(links) &&
-    links?.map((item) => (
-      <LinkCard
-        key={item.id}
-        linkId={item.id}
-        title={item.title}
-        handleURL={item.handleURL}
-        userId={userId || (user.isLoaded ? user.user?.id : "")}
-        isSignedIn={user.isSignedIn}
-      />
-    ));
+    (Array.isArray(links) && links.length!=0) ?
+      links?.map((item) => (
+        <LinkCard
+          key={item.id}
+          linkId={item.id}
+          title={item.title}
+          handleURL={item.handleURL}
+          userId={userId || (user.isLoaded ? user.user?.id : "")}
+          isSignedIn={user.isSignedIn}
+        />
+      ))
+      : (<h1 className="text-[3rem] font-bold uppercase opacity-10 my-[1rem]">Links Land Here</h1>);
 
 
 

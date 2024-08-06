@@ -12,7 +12,7 @@ import {
 import { useState } from "react";
 
 const AddBanner = (props: {userId: string | any}) => {
-  const [isUploadOpen, setIsUploadOpen] = useState<boolean | any>();
+  const [isUploadOpen, setIsUploadOpen] = useState<boolean | any>(false);
   const [imageFile, setImageFile] = useState<File | any>();
   const handleUploadOpen = () => setIsUploadOpen(!isUploadOpen);
   const handleImageChange = (e: any) => {

@@ -1,6 +1,6 @@
 const Loading = () => {
   return (
-    <div className="text-2xl animate-breathe">Loading . . .</div>
+    <div className="text-2xl animate-breathe font-bold">Loading . . .</div>
   )
 }
 

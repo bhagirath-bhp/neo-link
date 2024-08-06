@@ -63,7 +63,7 @@ const ThemeColorProvider = () => {
                   className="rounded-sm px-[0.2rem]"
                   onChange={(e) => handleColorChange(colorName, e.target.value)}
                 />
-                <span>{color}</span>
+                <span className="text-black">{color}</span>
               </div>
             ))}
           </div>

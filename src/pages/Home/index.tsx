@@ -49,7 +49,6 @@ const Home = () => {
     setTimeout(()=>{
       setLoader(false);
     }, 1000)
-    console.log(loader)
   }, [])
 
   if (user.isLoaded && !user.isSignedIn) {

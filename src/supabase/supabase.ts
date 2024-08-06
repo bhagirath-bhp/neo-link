@@ -182,7 +182,6 @@ export const sendContact = async (
 };
 
 export const deleteContact = async (contactId: string, userId: string) => {
-  console.log(contactId, userId);
   const response = await authClient
     .from("Contacts")
     .delete()

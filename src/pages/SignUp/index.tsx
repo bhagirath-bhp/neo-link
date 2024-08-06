@@ -4,7 +4,7 @@ import { SignUp } from "@clerk/clerk-react"
 
 const SignUpPage = () => {
   const signInUrl = import.meta.env.VITE_APP_SIGNIN_URL;
-  const redirectURL = import.meta.env.VITE_APP_BASE_URL ;
+  const redirectURL = import.meta.env.VITE_APPw_BASE_URL ;
   
 
   return (
